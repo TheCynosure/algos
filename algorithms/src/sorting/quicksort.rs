@@ -38,15 +38,43 @@ where F: Fn(&T, &T) -> bool {
 #[cfg(test)]
 mod sort_test {
     use super::*;
-
-    //TODO: Build more test cases.
     
     #[test]
     fn sort_i32() {
+		//Sort a normal array
+		let mut test_vec = vec![1, 5, 7, 8, 2, 4];
+		sort(&mut test_vec[..], &|num1, num2|{ num1 > num2 });
+		assert_eq!(test_vec, vec![1, 2, 4, 5, 7, 8]);
+    
+    	//Check on an unnsorted array with repeat elems
         let mut test_vec = vec![1, 5, 8, 2, 6, 1];
-        println!("PreSort: {:?}", test_vec);
         sort(&mut test_vec[..], &|num1, num2|{ num1 > num2 });   
-        println!("PostSort: {:?}", test_vec);
-        assert_eq!(test_vec, vec![1, 1, 2, 5, 6, 8]);  
+        assert_eq!(test_vec, vec![1, 1, 2, 5, 6, 8]);
+
+		//Check on a sorted array
+        let mut test_vec = vec![1, 2, 3, 4, 5, 6];
+        sort(&mut test_vec[..], &|num1, num2|{ num1 > num2 });
+        assert_eq!(test_vec, vec![1, 2, 3, 4, 5, 6]);		
     }
+
+    fn comp_func(num1: &u32, num2: &u32) -> bool {
+    	num1 > num2
+    }
+
+    #[test]
+    fn function_pass_test() {
+    	//TODO: We can use something like this to do a String sort.
+		let mut test_vec = vec![1, 3, 2];
+		sort(&mut test_vec[..], &comp_func);
+		assert_eq!(test_vec, vec![1, 2, 3]);  	
+    }
+
+	#[test]
+	fn sort_reverse_u32() {
+		//Sort a normal array, but in reverse order.
+		//Todo this just make it return if num2 is bigger, instead of num1.
+		let mut test_vec = vec![1, 5, 7, 8, 2, 4];
+		sort(&mut test_vec[..], &|num1, num2|{ num2 > num1 });
+		assert_eq!(test_vec, vec![8, 7, 5, 4, 2, 1]);
+	}    
 }
