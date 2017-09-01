@@ -1,4 +1,5 @@
 #[allow(dead_code)]
+//TODO: Build some default compare funcs for common types like u32 and Strings.
 //Compare func should return true if first is bigger.
 pub fn sort<T, F>(arr: &mut [T], compare_func: &F)
 where F: Fn(&T, &T) -> bool {
@@ -26,6 +27,8 @@ where F: Fn(&T, &T) -> bool {
     arr.swap(wall, high);
     //Now sort left and right of the wall.
     sort(&mut arr[..wall], compare_func);
+    //TODO: Find a more elegant way to deal with this edge case.
+    //This happens when the wall of the array never changed its initial position.
     if wall < arr.len() - 1 {
         sort(&mut arr[wall + 1..], compare_func);
     }
@@ -35,6 +38,8 @@ where F: Fn(&T, &T) -> bool {
 #[cfg(test)]
 mod sort_test {
     use super::*;
+
+    //TODO: Build more test cases.
     
     #[test]
     fn sort_i32() {
