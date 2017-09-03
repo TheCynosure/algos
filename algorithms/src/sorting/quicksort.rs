@@ -34,6 +34,26 @@ where F: Fn(&T, &T) -> bool {
     }
 }
 
+//Compare Func usually return true if the first one is bigger, so here we want to return the smaller one /
+//first one alphabetically.
+pub fn string_alphabetic(str1: &String, str2: &String) -> bool {
+    //Find if any of the characters in str1 are before str2's characters
+    //in the alphabet.
+    for c_tuple in str1.chars().zip(str2.chars()) {
+        let (str1_c, str2_c) = c_tuple;
+        if str1_c.is_alphabetic() && str2_c.is_alphabetic() {
+            return str1_c.to_digit(10) < str2_c.to_digit(10);
+        }
+    } 
+
+    //Else return if str1 is shorter, as it should be first then.
+    if str1.len() > str2.len() {
+        return true;     
+    }
+    //Return false otherwise, because str2 should come before one I guess.
+    false
+}
+
 
 #[cfg(test)]
 mod sort_test {
@@ -54,7 +74,7 @@ mod sort_test {
 		//Check on a sorted array
         let mut test_vec = vec![1, 2, 3, 4, 5, 6];
         sort(&mut test_vec[..], &|num1, num2|{ num1 > num2 });
-        assert_eq!(test_vec, vec![1, 2, 3, 4, 5, 6]);		
+        assert_eq!(test_vec, vec![1, 2, 3, 4, 5, 6]);
     }
 
     fn comp_func(num1: &u32, num2: &u32) -> bool {
@@ -66,7 +86,7 @@ mod sort_test {
     	//TODO: We can use something like this to do a String sort.
 		let mut test_vec = vec![1, 3, 2];
 		sort(&mut test_vec[..], &comp_func);
-		assert_eq!(test_vec, vec![1, 2, 3]);  	
+		assert_eq!(test_vec, vec![1, 2, 3]);
     }
 
 	#[test]
@@ -76,5 +96,14 @@ mod sort_test {
 		let mut test_vec = vec![1, 5, 7, 8, 2, 4];
 		sort(&mut test_vec[..], &|num1, num2|{ num2 > num1 });
 		assert_eq!(test_vec, vec![8, 7, 5, 4, 2, 1]);
-	}    
+	}
+
+    //TODO: Make the sorting of the list work for Strings and &str.
+
+	#[test]
+	fn sort_string_test() {
+        let mut test_vec = vec!["Cat".to_string(), "Dog".to_string(), "Antelope".to_string()];
+        sort(&mut test_vec[..], &string_alphabetic);
+        assert_eq!(test_vec, vec!["Antelope".to_string(), "Cat".to_string(), "Dog".to_string()]);
+	}
 }
