@@ -27,8 +27,8 @@ where F: Fn(&T, &T) -> bool {
     arr.swap(wall, high);
     //Now sort left and right of the wall.
     sort(&mut arr[..wall], compare_func);
-    //TODO: Find a more elegant way to deal with this edge case.
-    //This happens when the wall of the array never changed its initial position.
+    //If we want to sort the right side we have to check if the wall is at the end
+    //of the array, otherwise we could cause an overflow / error.
     if wall < arr.len() - 1 {
         sort(&mut arr[wall + 1..], compare_func);
     }
@@ -75,18 +75,6 @@ mod sort_test {
         let mut test_vec = vec![1, 2, 3, 4, 5, 6];
         sort(&mut test_vec[..], &|num1, num2|{ num1 > num2 });
         assert_eq!(test_vec, vec![1, 2, 3, 4, 5, 6]);
-    }
-
-    fn comp_func(num1: &u32, num2: &u32) -> bool {
-    	num1 > num2
-    }
-
-    #[test]
-    fn function_pass_test() {
-    	//TODO: We can use something like this to do a String sort.
-		let mut test_vec = vec![1, 3, 2];
-		sort(&mut test_vec[..], &comp_func);
-		assert_eq!(test_vec, vec![1, 2, 3]);
     }
 
 	#[test]
