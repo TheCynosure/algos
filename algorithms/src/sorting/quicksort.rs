@@ -37,13 +37,13 @@ where F: Fn(&T, &T) -> bool {
 
 //TODO: Fix ascii casting.
 #[allow(dead_code)]
-//Compare Func usually return true if the first one is bigger, so here we want to return the smaller one /
-//first one alphabetically.
+//Compare Func usually return true if the first one is bigger, so here we want to return the 
+//string that comes alphabetically last.
 pub fn string_alphabetic<S: string::ToString>(str1: &S, str2: &S) -> bool {
     let str1 = str1.to_string();
     let str2 = str2.to_string();
-    //Find if any of the characters in str1 are before str2's characters
-    //in the alphabet.
+    //Find if any of the characters in str1 alphabetically after
+    //str2's chars.
     for c_tuple in str1.chars().zip(str2.chars()) {
         let (str1_c, str2_c) = c_tuple;
         if str1_c.is_alphabetic() && str2_c.is_alphabetic() {
@@ -55,7 +55,7 @@ pub fn string_alphabetic<S: string::ToString>(str1: &S, str2: &S) -> bool {
     if str1.len() > str2.len() {
         return false;     
     }
-    //Return true otherwise, because str2 should come before one I guess.
+    //Return true otherwise, because str2 should come before one.
     true
 }
 
