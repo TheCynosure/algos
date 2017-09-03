@@ -35,6 +35,7 @@ where F: Fn(&T, &T) -> bool {
     }
 }
 
+//TODO: Fix ascii casting.
 #[allow(dead_code)]
 //Compare Func usually return true if the first one is bigger, so here we want to return the smaller one /
 //first one alphabetically.
@@ -46,16 +47,16 @@ pub fn string_alphabetic<S: string::ToString>(str1: &S, str2: &S) -> bool {
     for c_tuple in str1.chars().zip(str2.chars()) {
         let (str1_c, str2_c) = c_tuple;
         if str1_c.is_alphabetic() && str2_c.is_alphabetic() {
-            return str1_c.to_digit(10) < str2_c.to_digit(10);
+            return (str1_c as u32) > (str2_c as u32);
         }
     } 
 
     //Else return if str1 is shorter, as it should be first then.
     if str1.len() > str2.len() {
-        return true;     
+        return false;     
     }
-    //Return false otherwise, because str2 should come before one I guess.
-    false
+    //Return true otherwise, because str2 should come before one I guess.
+    true
 }
 
 #[cfg(test)]
