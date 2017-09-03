@@ -35,7 +35,6 @@ where F: Fn(&T, &T) -> bool {
     }
 }
 
-//TODO: Fix ascii casting.
 #[allow(dead_code)]
 //Compare Func usually return true if the first one is bigger, so here we want to return the 
 //string that comes alphabetically last.
