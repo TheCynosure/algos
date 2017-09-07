@@ -1,0 +1,1 @@
+/home/jack/Dev/PersonalProjects/WorkingOn/algos/algorithms/target/debug/libalgorithms.rlib: /home/jack/Dev/PersonalProjects/WorkingOn/algos/algorithms/src/lib.rs /home/jack/Dev/PersonalProjects/WorkingOn/algos/algorithms/src/sorting/mod.rs /home/jack/Dev/PersonalProjects/WorkingOn/algos/algorithms/src/sorting/quicksort.rs
