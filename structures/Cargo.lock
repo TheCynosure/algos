@@ -1,0 +1,11 @@
+[root]
+name = "structures"
+version = "0.1.0"
+dependencies = [
+ "algorithms 0.1.0",
+]
+
+[[package]]
+name = "algorithms"
+version = "0.1.0"
+

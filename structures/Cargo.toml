@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["jack"]
 
 [dependencies]
+algorithms = { path = "../algorithms/target/package/algorithms-0.1.0" }
