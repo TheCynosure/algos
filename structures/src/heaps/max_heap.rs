@@ -1,5 +1,9 @@
 extern crate algorithms;
 
+//For normal sorting purpose of a max_heap comparator function
+//returns if the second parameter is larger than the first.
+//This is because this is how the sorting algorithms sort backwards, i.e. in the format of
+//a max heap.
 pub struct MaxHeap<T, F> {
 	elems: Vec<T>,
 	size: usize,
@@ -21,17 +25,31 @@ impl<T, F> MaxHeap<T, F> {
 	pub fn quicksort_heapify(mut arr: Vec<T>, f: F) -> Self
 	where F: Fn(&T, &T) -> bool {
 		algorithms::sorting::quicksort::sort(&mut arr[..], &f);
+		let len = arr.len();
 		Self {
 			elems: arr,
-			size: 0,
+			size: len,
 			comparator_function: f,
 		}
 	}
 
 	//This method is based on the sorting method explained to me by my TA Aritra.
 	//It should sort the array worst case 2^n Log(n) I believe.
-	pub fn aritra_heapify() {
-		
+	pub fn aritra_heapify(mut arr: Vec<T>, f: F) -> Self
+	where F: Fn(&T, &T) -> bool {
+		let len = arr.len();
+		let mh = MaxHeap {
+			elems: arr,
+			size: len,
+			comparator_function: f,
+		};
+	
+		let childless_nodes = (len as f64).log(2.0) as usize;
+		for i in (len - 1)..(len - childless_nodes) {
+
+		}
+
+		return mh;
 	}
 
 	pub fn get_parent(&self, index: usize) -> usize {
