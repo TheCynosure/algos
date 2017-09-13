@@ -43,7 +43,8 @@ impl<T, F> MaxHeap<T, F> {
 			size: len,
 			comparator_function: f,
 		};
-	
+
+		//Start at the end
 		for i in (0..len).rev() {
 			//While the child is greater than the parent.
 			let mut child_index = i;
@@ -81,7 +82,7 @@ impl<T, F> MaxHeap<T, F> {
 			return None;
 		}
 		Some((index * 2) + 2)
-	}	
+	}
 }
 
 #[cfg(test)]
@@ -106,5 +107,29 @@ mod test {
 
 		let test_heap = MaxHeap::aritra_heapify(vec![1, 5, 7, 3, 2, 6, 4], |num1, num2| {num2 > num1});		
 		assert_eq!(test_heap.elems[test_heap.get_parent(1)], 7);
+	}
+
+	#[test]
+	fn push_test() {
+		//TODO: Push something onto the heap.
+	}
+
+	#[test]
+	fn delete_test() {
+		//TODO: Delete something from the heap by index.
+	}
+
+	#[test]
+	fn clear_test() {
+		//TODO: Clear the current heap.
+	}
+
+	#[test]
+	fn max_test() {
+		//TODO: Get the maximum element in the heap.
+	}
+
+	fn search_test() {
+		//TODO: Find elements in the heap.
 	}
 }
