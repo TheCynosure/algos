@@ -4,7 +4,7 @@ extern crate algorithms;
 //returns if the second parameter is larger than the first.
 //This is because this is how the sorting algorithms sort backwards, i.e. in the format of
 //a max heap.
-pub struct MaxHeap<T, F: Fn(&T, &T) -> bool> {
+pub struct MaxHeap<T, F> {
 	elems: Vec<T>,
 	size: usize,
 	comparator_function: F,
