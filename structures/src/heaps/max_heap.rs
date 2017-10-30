@@ -98,8 +98,19 @@ where F: Fn(&T, &T) -> bool {
 		self.comp_p_and_c_swap(len - 1)
 	}
 
+	pub fn clear(&mut self) {
+	    self.elems.clear();
+	}
+
 	pub fn length(&self) -> usize {
 		self.elems.len()
+	}
+
+	pub fn max(&self) -> Option<&T> {
+	    if self.elems.len() > 0 {
+	        return Some(&self.elems[0]);
+	    }
+	    None
 	}
 }
 
@@ -147,14 +158,25 @@ mod test {
 
 	#[test]
 	fn clear_test() {
-		//TODO: Clear the current heap.
-		assert!(false);
+        //Not testing the sorting capabilities here, just check if there is a heap with elements.
+		let mut test_heap = MaxHeap::aritra_heapify(vec![7, 6, 5, 4, 3, 2, 1], |num1, num2| {num2 > num1});
+        assert_eq!(test_heap.length(), 7);
+
+        //Clear the heap and check again.
+        test_heap.clear();
+        assert_eq!(test_heap.length(), 0)
 	}
 
 	#[test]
 	fn max_test() {
-		//TODO: Get the maximum element in the heap.
-		assert!(false);
+        let test_heap = MaxHeap::aritra_heapify(vec![7, 6, 5, 4, 3, 2, 1], |num1, num2| {num2 > num1});
+	    assert_eq!(test_heap.max(), Some(&7));
+
+	    let mut test_heap = MaxHeap::aritra_heapify(vec![8, 6, 5, 0, 11, 20, 100, 6], |num1, num2| {num2 > num1});
+	    assert_eq!(test_heap.max(), Some(&100));
+
+	    test_heap.clear();
+	    assert_eq!(test_heap.max(), None);
 	}
 
 	fn search_test() {
